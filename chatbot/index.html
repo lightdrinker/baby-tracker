@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리아기 성장 발달 트래커</title>
+    
+    <!-- PWA 및 모바일 홈 화면 아이콘 설정 -->
+    <meta name="apple-mobile-web-app-title" content="발달트래커">
+    <meta name="application-name" content="발달트래커">
+    <meta name="theme-color" content="#fde68a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- PWA 아이콘 -->
+    <link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,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">
+    <link rel="icon" type="image/png" sizes="512x512" href="data:image/png;base64,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">
+    <link rel="apple-touch-icon" sizes="192x192" href="data:image/png;base64,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">
+    <link rel="apple-touch-icon" sizes="512x512" href="data:image/png;base64,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">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .checkbox-custom:checked + div { background-color: #10b981; border-color: #10b981; }
+        .checkbox-custom:checked + div svg { opacity: 1; }
+        .line-through-custom { text-decoration: line-through; color: #9ca3af; }
+
+        @keyframes slideInRight { 0% { transform: translateX(100%); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOutLeft { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(-30%); opacity: 0; } }
+        @keyframes slideInLeft { 0% { transform: translateX(-100%); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOutRight { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(30%); opacity: 0; } }
+        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+        
+        @keyframes slideUp { 0% { transform: translateY(100%); } 100% { transform: translateY(0); } }
+        .slide-up { animation: slideUp 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    </style>
+</head>
+<body class="flex justify-center h-[100dvh] text-gray-800 overflow-hidden sm:bg-gray-200 sm:py-4 relative">
+
+    <div class="w-full max-w-md bg-gray-50 h-full shadow-lg relative flex flex-col sm:rounded-[2rem] sm:border sm:border-gray-300 overflow-hidden">
+        
+        <!-- Header -->
+        <header class="bg-yellow-100 p-6 rounded-b-3xl shadow-sm z-10 shrink-0">
+            <h1 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <i class="fa-solid fa-baby text-yellow-600"></i> 우리아기 발달 트래커
+            </h1>
+            <p class="text-sm text-gray-600 mt-2">개월수별 핵심 변화와 체크리스트를 확인하세요!</p>
+        </header>
+
+        <!-- Navigation & Info Area -->
+        <div class="px-5 pt-5 pb-2 shrink-0">
+            <div class="flex items-center justify-between bg-white px-4 py-3 rounded-xl shadow-sm mb-5 border border-yellow-200">
+                <span class="text-sm font-bold text-gray-700 flex items-center gap-2">
+                    <i class="fa-solid fa-cake-candles text-pink-400"></i> 아기 생일
+                </span>
+                <input type="date" id="birth-date" class="text-sm text-gray-600 outline-none bg-transparent cursor-pointer font-medium">
+            </div>
+
+            <div class="flex justify-between items-end mb-3">
+                <div>
+                    <span class="text-gray-700 font-medium block">현재 아기 개월 수:</span>
+                    <span id="projected-date" class="text-[13px] text-blue-500 font-bold h-4 block mt-1">
+                        생일을 입력해보세요!
+                    </span>
+                </div>
+                <span class="text-3xl font-bold text-yellow-600"><span id="month-display">1</span>개월</span>
+            </div>
+            
+            <div class="flex items-center gap-3 mt-1">
+                <button id="btn-prev" class="w-8 h-8 shrink-0 bg-white shadow-sm rounded-full flex items-center justify-center text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 active:scale-95 transition-all disabled:opacity-30 disabled:pointer-events-none">
+                    <i class="fa-solid fa-minus text-sm"></i>
+                </button>
+                <input type="range" id="month-slider" min="1" max="24" value="1" 
+                       class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-yellow-500">
+                <button id="btn-next" class="w-8 h-8 shrink-0 bg-white shadow-sm rounded-full flex items-center justify-center text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 active:scale-95 transition-all disabled:opacity-30 disabled:pointer-events-none">
+                    <i class="fa-solid fa-plus text-sm"></i>
+                </button>
+            </div>
+            
+            <div class="flex justify-between text-xs text-gray-400 mt-2 px-9">
+                <span>1개월</span>
+                <span>1돌</span>
+                <span>2돌</span>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto overflow-x-hidden relative mt-2 hide-scrollbar pb-20" id="content-container">
+            <!-- Content injected here -->
+        </main>
+
+        <!-- ✨ 플로팅 버튼 (AI 상담 시작) ✨ -->
+        <button id="btn-open-ai" class="absolute bottom-6 right-6 bg-gradient-to-r from-purple-500 to-indigo-500 text-white w-14 h-14 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all flex justify-center items-center z-20">
+            <i class="fa-solid fa-robot text-2xl"></i>
+        </button>
+
+        <!-- ✨ AI 상담 모달 (Bottom Sheet) ✨ -->
+        <div id="ai-modal-overlay" class="hidden absolute inset-0 bg-black/60 z-30 transition-opacity opacity-0 backdrop-blur-sm"></div>
+        <div id="ai-modal" class="hidden absolute bottom-0 left-0 w-full h-[85%] bg-gray-50 rounded-t-3xl shadow-2xl z-40 flex-col overflow-hidden transform translate-y-full transition-transform duration-300">
+            <!-- Modal Header -->
+            <div class="bg-white px-5 py-4 border-b flex justify-between items-center shrink-0">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-purple-100 rounded-full flex justify-center items-center text-purple-600">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <h2 class="font-bold text-gray-800 text-lg">AI 소아과 전문의</h2>
+                </div>
+                <button id="btn-close-ai" class="text-gray-400 hover:text-gray-700 text-xl w-8 h-8">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Chat History Area -->
+            <div id="chat-container" class="flex-1 overflow-y-auto p-5 space-y-4">
+                <!-- AI Initial Message -->
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500 shrink-0 mt-1">
+                        <i class="fa-solid fa-robot text-xs"></i>
+                    </div>
+                    <div class="bg-white border border-gray-100 shadow-sm p-3 rounded-2xl rounded-tl-none text-sm text-gray-700">
+                        안녕하세요! 부모님의 든든한 육아 멘토입니다.<br>
+                        현재 <strong id="ai-context-month" class="text-purple-600">1개월</strong> 기록을 보고 있어요. 우리 아이 발달과 관련해 어떤 점이 궁금하신가요?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="bg-white p-4 border-t shrink-0">
+                <div class="flex items-center gap-2 bg-gray-100 rounded-full px-4 py-2">
+                    <input type="text" id="ai-input" placeholder="예: 아직 뒤집기를 못해요. 괜찮을까요?" 
+                           class="flex-1 bg-transparent text-sm outline-none py-1">
+                    <button id="btn-send-ai" class="text-white bg-indigo-500 w-8 h-8 rounded-full flex justify-center items-center hover:bg-indigo-600 transition-colors disabled:opacity-50">
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </div>
+                <div class="text-[10px] text-gray-400 text-center mt-2">
+                    💡 AI의 답변은 참고용이며, 정확한 진단은 전문의와 상담하세요.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const milestoneData = [
+            {
+                range: [1], label: '생후 1개월',
+                size: { boy: '4.5kg / 54.7cm', girl: '4.2kg / 53.0cm' },
+                behaviors: ['엄마, 아빠 목소리에 반응해요.', '초점책을 보며 시선을 맞춰요.', '배냇짓(무의식적인 미소)을 해요.', '깜짝 놀라는 모로 반사가 있어요.'],
+                checklist: [
+                    { id: 'c1_1', text: 'B형 간염 2차 예방접종 완료하기' },
+                    { id: 'c1_2', text: '수유 텀(시간)과 양 기록 어플 사용 시작' },
+                    { id: 'c1_3', text: '모로반사 방지를 위한 속싸개/스와들업 입히기' },
+                    { id: 'c1_4', text: '태열 관리를 위해 실내 온도 22도, 습도 50% 유지' },
+                    { id: 'c1_5', text: '뼈 성장을 위한 액상 비타민 D 매일 먹이기' }
+                ]
+            },
+            {
+                range: [2], label: '생후 2개월',
+                size: { boy: '5.6kg / 58.4cm', girl: '5.1kg / 57.1cm' },
+                behaviors: ['목을 가누기 시작해요 (터미타임).', '"우~", "아~" 옹알이를 해요.', '사람을 보고 방긋 웃어요.', '자기 손을 쳐다봐요.'],
+                checklist: [
+                    { id: 'c2_1', text: '2개월 국가예방접종(펜탁심 등) 및 로타바이러스 접종' },
+                    { id: 'c2_2', text: '아기가 깨어있을 때 터미타임(엎드려 놓기) 짧게 연습' },
+                    { id: 'c2_3', text: '예쁜 두상을 위해 누워있는 방향 좌우로 번갈아 주기' },
+                    { id: 'c2_4', text: '밤낮 구분 시작! 수면 의식(목욕-수유-자장가) 루틴 만들기' },
+                    { id: 'c2_5', text: '수유량이 하루 800~1000ml 정도 되는지 체크' }
+                ]
+            },
+            {
+                range: [3], label: '생후 3개월',
+                size: { boy: '6.4kg / 61.4cm', girl: '5.8kg / 59.8cm' },
+                behaviors: ['소리 나는 쪽으로 고개를 돌려요.', '손을 모으고 장난감을 잡으려 해요.', '옹알이 소리가 다양해져요.'],
+                checklist: [
+                    { id: 'c3_1', text: '침을 많이 흘리기 시작하므로 턱받이/손수건 넉넉히 준비' },
+                    { id: 'c3_2', text: '손싸개 벗겨주고 소근육(촉각) 발달 자극해주기' },
+                    { id: 'c3_3', text: '뒤집기 시도에 대비해 침대 주변 위험한 물건 치우기' },
+                    { id: 'c3_4', text: '통잠을 위해 밤수(밤중 수유) 간격 서서히 늘려보기' },
+                    { id: 'c3_5', text: '백일의 기절(수면퇴행기)이 올 수 있으니 멘탈 관리!' }
+                ]
+            },
+            {
+                range: [4], label: '생후 4개월',
+                size: { boy: '7.0kg / 63.9cm', girl: '6.4kg / 62.1cm' },
+                behaviors: ['뒤집기를 시도해요.', '모든 것을 입으로 가져가요 (구강기).', '소리 내어 깔깔 웃어요.'],
+                checklist: [
+                    { id: 'c4_1', text: '생후 4~6개월 2차 영유아 건강검진 받기 (1차는 생후 14~35일)' },
+                    { id: 'c4_2', text: '구강기 대비! 장난감, 치발기 매일 깨끗하게 소독하기' },
+                    { id: 'c4_3', text: '초기 이유식 준비물(냄비, 스파출라, 용기 등) 세팅' },
+                    { id: 'c4_4', text: '수면 교육(안눕법, 퍼버법 등) 아기 성향에 맞춰 시도' },
+                    { id: 'c4_5', text: '침대나 쇼파 등 낙상 사고 각별히 주의하기' }
+                ]
+            },
+            {
+                range: [5], label: '생후 5개월',
+                size: { boy: '7.5kg / 65.9cm', girl: '6.9kg / 64.0cm' },
+                behaviors: ['완벽하게 뒤집기를 해요.', '발을 잡고 입으로 가져가요.', '낯선 사람을 구별하기 시작해요.'],
+                checklist: [
+                    { id: 'c5_1', text: '쌀미음으로 대망의 첫 이유식 시작하기' },
+                    { id: 'c5_2', text: '쏘서, 점퍼루 등 장난감 탑승은 하루 20~30분 내외로 제한' },
+                    { id: 'c5_3', text: '첫 이앓이 징후(미열, 침, 보챔)가 있는지 잇몸 관찰' },
+                    { id: 'c5_4', text: '거울을 자주 보여주며 자아 인식을 도와주기' },
+                    { id: 'c5_5', text: '밤중 수유 완전히 끊기 시도 (치아 우식증 예방)' }
+                ]
+            },
+            {
+                range: [6], label: '생후 6개월',
+                size: { boy: '7.9kg / 67.6cm', girl: '7.3kg / 65.7cm' },
+                behaviors: ['혼자서 잠깐씩 앉아있어요.', '이름을 부르면 반응해요.', '아랫니가 올라오기 시작해요.'],
+                checklist: [
+                    { id: 'c6_1', text: '6개월 국가예방접종 (B형간염 3차 등) + 독감 첫 접종 시 2회 필요 (한 달 간격)' },
+                    { id: 'c6_2', text: '엄마표 철분 고갈 시기! 이유식에 소고기 매일 추가하기' },
+                    { id: 'c6_3', text: '빨대컵이나 추빨대컵으로 물 마시는 연습 시작' },
+                    { id: 'c6_4', text: '떡뻥 등 첫 간식 시도 시 알레르기와 질식 주의' },
+                    { id: 'c6_5', text: '아랫니가 났다면 구강티슈나 실리콘 칫솔로 양치 시작' }
+                ]
+            },
+            {
+                range: [7], label: '생후 7개월',
+                size: { boy: '8.3kg / 69.2cm', girl: '7.6kg / 67.3cm' },
+                behaviors: ['배밀이를 하거나 기어가기 시작해요.', '엄마 아빠를 알아보고 낯가림이 생겨요.', '양손에 물건을 쥐고 부딪혀요.'],
+                checklist: [
+                    { id: 'c7_1', text: '행동 반경이 넓어지므로 베이비룸이나 안전가드 설치' },
+                    { id: 'c7_2', text: '모서리 쿵 방지, 콘센트 마개 등 집안 안전 점검 필수' },
+                    { id: 'c7_3', text: '중기 이유식(하루 2끼)으로 늘리고 다양한 식재료 테스트' },
+                    { id: 'c7_4', text: '분리불안 완화를 위해 까꿍 놀이(대상영속성) 자주 해주기' },
+                    { id: 'c7_5', text: '작은 물건(동전, 건전지)을 삼키지 않도록 바닥 청소 철저' }
+                ]
+            },
+            {
+                range: [8], label: '생후 8개월',
+                size: { boy: '8.6kg / 70.6cm', girl: '7.9kg / 68.7cm' },
+                behaviors: ['기어다니며 적극적으로 탐색해요.', '"엄마", "아빠" 등 말소리를 흉내내요.', '낯가림이 심해지고 분리불안이 생겨요.'],
+                checklist: [
+                    { id: 'c8_1', text: '기어다니기 시작하므로 바닥 안전 전면 점검' },
+                    { id: 'c8_2', text: '소파나 침대에서 혼자 두지 않기 (추락 주의)' },
+                    { id: 'c8_3', text: '중기 이유식 다양한 식재료 알레르기 테스트 계속하기' },
+                    { id: 'c8_4', text: '까꿍 놀이, 공 굴리기 등 상호작용 놀이 자주 해주기' },
+                    { id: 'c8_5', text: '손가락 집기 연습을 위한 핑거푸드 조금씩 시도' }
+                ]
+            },
+            {
+                range: [9], label: '생후 9개월',
+                size: { boy: '8.9kg / 72.0cm', girl: '8.2kg / 70.1cm' },
+                behaviors: ['소파나 가구를 잡고 일어서요.', '잼잼, 짝짜꿍 등 모방 행동을 해요.', '원하는 것을 손가락으로 가리켜요.'],
+                checklist: [
+                    { id: 'c9_1', text: '생후 9~12개월 3차 영유아 건강검진 받기 (구강검진은 18개월부터)' },
+                    { id: 'c9_2', text: '후기 이유식(하루 3끼) 시작하며 어른의 식사 패턴 맞추기' },
+                    { id: 'c9_3', text: '잡고 일어서다 넘어짐 대비 (머리 쿵 방지 쿠션 등)' },
+                    { id: 'c9_4', text: '위험한 행동을 할 때 "안 돼"라고 단호하고 짧게 제지하기' },
+                    { id: 'c9_5', text: '스스로 먹을 수 있도록 자기주도 이유식(핑거푸드) 제공' }
+                ]
+            },
+            {
+                range: [10], label: '생후 10개월',
+                size: { boy: '9.2kg / 73.3cm', girl: '8.5kg / 71.5cm' },
+                behaviors: ['가구를 잡고 옆으로 걸어요 (cruising).', '엄지와 검지로 물건을 집어요.', '간단한 지시를 이해하기 시작해요.'],
+                checklist: [
+                    { id: 'c10_1', text: '가구 모서리 보호대 전면 부착 (걷기 시도 대비)' },
+                    { id: 'c10_2', text: '손가락 소근육 발달을 위한 블록, 컵 쌓기 놀이' },
+                    { id: 'c10_3', text: '후기 이유식 진밥으로 점차 농도 높여가기' },
+                    { id: 'c10_4', text: '호기심이 넘치는 시기, 안전한 탐색 환경 만들어주기' },
+                    { id: 'c10_5', text: '아이 이름 자주 불러주며 반응 유도하기' }
+                ]
+            },
+            {
+                range: [11], label: '생후 11개월',
+                size: { boy: '9.4kg / 74.5cm', girl: '8.7kg / 72.8cm' },
+                behaviors: ['혼자서 몇 걸음 걷기 시도해요.', '"맘마", "빠빠" 등 의미있는 말을 해요.', '어른 행동을 따라 하며 흉내를 내요.'],
+                checklist: [
+                    { id: 'c11_1', text: '돌잔치 준비 시작 (장소, 한복, 돌상 등)' },
+                    { id: 'c11_2', text: '첫 걸음마 대비 안전한 보행 공간 확보' },
+                    { id: 'c11_3', text: '돌 이후 생우유 전환 준비 (분유에서 서서히 교체)' },
+                    { id: 'c11_4', text: '손가락으로 먹기, 숟가락 쥐기 등 식사 자립 연습' },
+                    { id: 'c11_5', text: '위험한 물건(가위, 칼, 약) 손에 닿지 않는 곳에 보관' }
+                ]
+            },
+            {
+                range: [12], label: '생후 12개월 (돌)',
+                size: { boy: '9.6kg / 75.7cm', girl: '8.9kg / 74.0cm' },
+                behaviors: ['도움 없이 혼자서 걷기 시작해요.', '의미 있는 단어(물, 맘마)를 사용해요.', '간단한 지시어("가져와")를 이해해요.'],
+                checklist: [
+                    { id: 'c12_1', text: '돌 예방접종 (MMR 1차, 수두, 일본뇌염 1~2차) 스케줄 소아과 확인' },
+                    { id: 'c12_2', text: '젖병을 떼고 빨대컵이나 일반 컵으로 생우유 적응하기' },
+                    { id: 'c12_3', text: '돌발진(고열 후 열꽃)이 흔한 시기이므로 해열제 상비' },
+                    { id: 'c12_4', text: '유아식(맨밥+반찬) 진행 및 제자리에 앉아 먹는 식사 예절 교육' },
+                    { id: 'c12_5', text: '치아 건강을 위해 쪽쪽이(공갈젖꼭지) 서서히 떼기 시도' }
+                ]
+            },
+            {
+                range: [13, 14, 15], label: '13~15개월',
+                size: { boy: '10.2kg / 78.0cm', girl: '9.6kg / 76.5cm' },
+                behaviors: ['혼자서 안정적으로 걸어요.', '두 단어를 연결하기 시작해요.', '컵을 들고 혼자서 마셔요.'],
+                checklist: [
+                    { id: 'c13_1', text: '15개월 예방접종(DTaP, 폴리오 등) 스케줄 확인' },
+                    { id: 'c13_2', text: '야외 걷기 시작! 편한 신발과 미아방지 가방/목걸이 준비' },
+                    { id: 'c13_3', text: '블록 쌓기, 모양 맞추기 장난감으로 소근육과 인지 발달 돕기' },
+                    { id: 'c13_4', text: '양치 거부가 심해지므로 관련 그림책이나 놀이로 유도하기' },
+                    { id: 'c13_5', text: '위험하지 않은 선에서 아이 스스로 선택하는 자율성 존중' }
+                ]
+            },
+            {
+                range: [16, 17, 18], label: '16~18개월',
+                size: { boy: '10.8kg / 81.5cm', girl: '10.2kg / 80.0cm' },
+                behaviors: ['빨리 걷거나 뛸 수 있어요.', '숟가락질을 스스로 하려고 해요.', '자기 주장이 강해지고 떼를 써요.'],
+                checklist: [
+                    { id: 'c16_1', text: '18개월 4차 영유아 건강검진 + 1차 구강검진 받기 (18~29개월 내)' },
+                    { id: 'c16_2', text: '일명 마의 18개월! 떼쓰기에 대한 단호하고 일관된 훈육 숙지' },
+                    { id: 'c16_3', text: '스마트폰, TV 등 미디어 노출은 최대한 미루거나 엄격히 제한' },
+                    { id: 'c16_4', text: '다 놀고 난 뒤 "같이 정리하자"며 장난감 정리 습관 기르기' },
+                    { id: 'c16_5', text: '"기저귀 가져올래?" 등 아주 간단한 심부름 시켜보기' }
+                ]
+            },
+            {
+                range: [19, 20, 21], label: '19~21개월',
+                size: { boy: '11.5kg / 84.0cm', girl: '10.9kg / 82.5cm' },
+                behaviors: ['두 단어를 연결해서 말해요 ("엄마 까까").', '블록을 3~4개 쌓을 수 있어요.', '어른의 행동을 모방(청소 등)해요.'],
+                checklist: [
+                    { id: 'c19_1', text: '어휘 폭발기 시작! 책 읽어주기와 대화 많이 하기' },
+                    { id: 'c19_2', text: '두 발로 계단 오르내리기 연습 (손잡고 천천히)' },
+                    { id: 'c19_3', text: '간단한 역할 놀이(인형 밥 먹이기 등) 함께 해주기' },
+                    { id: 'c19_4', text: '친구와 어울리는 사회성 발달 위해 놀이터 자주 데려가기' },
+                    { id: 'c19_5', text: '취침 루틴(책 읽기, 자장가) 일정하게 유지하기' }
+                ]
+            },
+            {
+                range: [22, 23, 24], label: '22~24개월 (두돌)',
+                size: { boy: '12.2kg / 86.5cm', girl: '11.5kg / 85.0cm' },
+                behaviors: ['간단한 문장으로 대화가 가능해져요.', '혼자서 옷이나 신발을 벗을 수 있어요.', '대소변에 관심을 보여요 (배변 훈련 시작).'],
+                checklist: [
+                    { id: 'c22_1', text: '2세 영유아 구강검진(충치 확인) 받기' },
+                    { id: 'c22_2', text: '아이용 변기를 거실에 두고 친해지며 스트레스 없는 배변 훈련' },
+                    { id: 'c22_3', text: '언어 폭발기이므로 책을 많이 읽어주고 수다쟁이 부모 되기' },
+                    { id: 'c22_4', text: '공원, 놀이터 등에서 또래 친구들과 어울려 노는 기회 제공' },
+                    { id: 'c22_5', text: '아기 몸무게/키 확인 후 카시트 앞보기 전환 고려 (최대한 뒤보기 권장)' }
+                ]
+            }
+        ];
+
+        let currentMonth = 1;
+        let currentGroupLabel = ''; 
+        let currentMilestoneData = milestoneData[0];
+        
+        const checkedState = JSON.parse(localStorage.getItem('babyTrackerChecklist')) || {}; 
+        function saveState() {
+            localStorage.setItem('babyTrackerChecklist', JSON.stringify(checkedState));
+        }
+
+        const birthDateInput = document.getElementById('birth-date');
+        const projectedDateDisplay = document.getElementById('projected-date');
+        
+        const savedBirthDate = localStorage.getItem('babyTrackerBirthDate');
+        if (savedBirthDate) {
+            birthDateInput.value = savedBirthDate;
+        }
+
+        birthDateInput.addEventListener('change', (e) => {
+            localStorage.setItem('babyTrackerBirthDate', e.target.value);
+            updateProjectedDate();
+        });
+
+        function updateProjectedDate() {
+            if (!birthDateInput.value) {
+                projectedDateDisplay.textContent = '생일을 입력하면 예상 시기가 표시돼요!';
+                return;
+            }
+            const date = new Date(birthDateInput.value);
+            date.setMonth(date.getMonth() + currentMonth);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            projectedDateDisplay.innerHTML = `<i class="fa-regular fa-calendar-check mr-1"></i>${year}년 ${month}월 무렵`;
+        }
+
+        const slider = document.getElementById('month-slider');
+        const monthDisplay = document.getElementById('month-display');
+        const contentContainer = document.getElementById('content-container');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+
+        function updateButtonStates() {
+            btnPrev.disabled = currentMonth <= 1;
+            btnNext.disabled = currentMonth >= 24;
+        }
+
+        function changeMonth(newMonth) {
+            if (newMonth < 1) newMonth = 1;
+            if (newMonth > 24) newMonth = 24;
+            
+            if (newMonth !== currentMonth) {
+                let direction = newMonth > currentMonth ? 'prev' : 'next'; 
+                currentMonth = newMonth;
+                slider.value = currentMonth;
+                monthDisplay.textContent = currentMonth;
+                
+                updateProjectedDate();
+                updateButtonStates();
+
+                const newData = milestoneData.find(m => m.range.includes(currentMonth)) || milestoneData[0];
+                currentMilestoneData = newData;
+
+                if (newData.label !== currentGroupLabel) {
+                    currentGroupLabel = newData.label;
+                    document.getElementById('ai-context-month').textContent = currentGroupLabel;
+                    renderContent(newData, direction);
+                }
+            }
+        }
+
+        slider.addEventListener('input', (e) => changeMonth(parseInt(e.target.value)));
+        btnPrev.addEventListener('click', () => changeMonth(currentMonth - 1));
+        btnNext.addEventListener('click', () => changeMonth(currentMonth + 1));
+
+        function renderContent(data, direction) {
+            const sizeHtml = `
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
+                            <i class="fa-solid fa-weight-scale text-blue-400"></i> 평균 키 & 몸무게
+                        </h2>
+                        <span class="text-xs font-bold bg-yellow-100 text-yellow-700 px-2 py-1 rounded-md">${data.label} 기준</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-1 bg-blue-50 rounded-xl p-3 text-center">
+                            <i class="fa-solid fa-mars text-blue-400 mb-1 text-lg"></i>
+                            <div class="text-xs text-gray-500 mb-1">남아</div>
+                            <div class="font-bold text-gray-700 text-sm">${data.size.boy}</div>
+                        </div>
+                        <div class="flex-1 bg-pink-50 rounded-xl p-3 text-center">
+                            <i class="fa-solid fa-venus text-pink-400 mb-1 text-lg"></i>
+                            <div class="text-xs text-gray-500 mb-1">여아</div>
+                            <div class="font-bold text-gray-700 text-sm">${data.size.girl}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const behaviorsHtml = `
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-5">
+                    <h2 class="text-base font-bold text-gray-800 flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-star text-yellow-400"></i> 핵심 행동 변화
+                    </h2>
+                    <ul class="space-y-3 mt-2">
+                        ${data.behaviors.map(behavior => `
+                            <li class="flex items-start gap-2 text-sm text-gray-700">
+                                <i class="fa-solid fa-check text-green-400 mt-1 text-xs"></i>
+                                <span>${behavior}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+
+            const checklistHeader = `
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-10">
+                    <h2 class="text-base font-bold text-gray-800 flex items-center gap-2 mb-4">
+                        <i class="fa-regular fa-square-check text-purple-400"></i> 부모님 체크리스트
+                    </h2>
+                    <div class="space-y-3" id="checklist-items">
+            `;
+            
+            let checklistItems = data.checklist.map(item => {
+                const isChecked = checkedState[item.id] || false;
+                return `
+                    <label class="flex items-start gap-3 p-3 rounded-xl border ${isChecked ? 'bg-gray-50 border-gray-200' : 'bg-white border-gray-200'} cursor-pointer transition-colors duration-200">
+                        <div class="relative flex items-center justify-center mt-0.5">
+                            <input type="checkbox" class="checkbox-custom absolute opacity-0 w-0 h-0" 
+                                   data-id="${item.id}" ${isChecked ? 'checked' : ''}>
+                            <div class="w-5 h-5 border-2 rounded text-white flex items-center justify-center transition-colors duration-200 ${isChecked ? 'bg-green-500 border-green-500' : 'border-gray-300'}">
+                                <svg class="w-3 h-3 ${isChecked ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="text-sm flex-1 pt-0.5 transition-all duration-200 ${isChecked ? 'line-through-custom' : 'text-gray-700'}">
+                            ${item.text}
+                        </span>
+                    </label>
+                `;
+            }).join('');
+
+            const checklistFooter = `</div></div>`;
+            const fullHtml = sizeHtml + behaviorsHtml + checklistHeader + checklistItems + checklistFooter;
+
+            animatePageTransition(fullHtml, direction);
+        }
+
+        function animatePageTransition(htmlString, direction) {
+            const currentContainer = contentContainer.querySelector('.active-page');
+            const newPage = document.createElement('div');
+            newPage.className = 'active-page w-full px-4';
+            newPage.innerHTML = htmlString;
+
+            if (direction === 'init') {
+                newPage.style.animation = 'fadeIn 0.4s ease forwards';
+                contentContainer.appendChild(newPage);
+                bindCheckboxes(newPage);
+                return;
+            }
+
+            if (currentContainer) {
+                currentContainer.classList.remove('active-page');
+                currentContainer.classList.add('absolute', 'top-0', 'left-0', 'w-full', 'px-4');
+                
+                const ease = 'cubic-bezier(0.25, 1, 0.5, 1)';
+                if (direction === 'next') {
+                    currentContainer.style.animation = `slideOutLeft 0.4s ${ease} forwards`;
+                    newPage.style.animation = `slideInRight 0.4s ${ease} forwards`;
+                } else {
+                    currentContainer.style.animation = `slideOutRight 0.4s ${ease} forwards`;
+                    newPage.style.animation = `slideInLeft 0.4s ${ease} forwards`;
+                }
+
+                setTimeout(() => {
+                    if (currentContainer.parentNode) currentContainer.remove();
+                }, 400); 
+            }
+
+            contentContainer.appendChild(newPage);
+            bindCheckboxes(newPage);
+        }
+
+        function bindCheckboxes(container) {
+            const checkboxes = container.querySelectorAll('.checkbox-custom');
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', (e) => {
+                    const id = e.target.getAttribute('data-id');
+                    checkedState[id] = e.target.checked;
+                    saveState(); 
+
+                    const label = cb.closest('label');
+                    const textSpan = label.querySelector('span');
+                    const boxDiv = label.querySelector('.border-2');
+                    const svg = boxDiv.querySelector('svg');
+
+                    if (e.target.checked) {
+                        label.classList.replace('bg-white', 'bg-gray-50');
+                        boxDiv.classList.replace('border-gray-300', 'border-green-500');
+                        boxDiv.classList.add('bg-green-500');
+                        svg.classList.replace('opacity-0', 'opacity-100');
+                        textSpan.classList.replace('text-gray-700', 'line-through-custom');
+                    } else {
+                        label.classList.replace('bg-gray-50', 'bg-white');
+                        boxDiv.classList.replace('border-green-500', 'border-gray-300');
+                        boxDiv.classList.remove('bg-green-500');
+                        svg.classList.replace('opacity-100', 'opacity-0');
+                        textSpan.classList.replace('line-through-custom', 'text-gray-700');
+                    }
+                });
+            });
+        }
+
+        // ==========================================
+        // ✨ AI 상담 백엔드 연동 로직 ✨
+        // ==========================================
+        const btnOpenAi = document.getElementById('btn-open-ai');
+        const btnCloseAi = document.getElementById('btn-close-ai');
+        const aiModal = document.getElementById('ai-modal');
+        const aiModalOverlay = document.getElementById('ai-modal-overlay');
+        const btnSendAi = document.getElementById('btn-send-ai');
+        const aiInput = document.getElementById('ai-input');
+        const chatContainer = document.getElementById('chat-container');
+
+        // Modal 제어 로직
+        function toggleAiModal(show) {
+            if (show) {
+                aiModalOverlay.classList.remove('hidden');
+                aiModal.classList.remove('hidden');
+                setTimeout(() => {
+                    aiModalOverlay.classList.remove('opacity-0');
+                    aiModal.classList.remove('translate-y-full');
+                }, 10);
+            } else {
+                aiModalOverlay.classList.add('opacity-0');
+                aiModal.classList.add('translate-y-full');
+                setTimeout(() => {
+                    aiModalOverlay.classList.add('hidden');
+                    aiModal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        btnOpenAi.addEventListener('click', () => toggleAiModal(true));
+        btnCloseAi.addEventListener('click', () => toggleAiModal(false));
+        aiModalOverlay.addEventListener('click', () => toggleAiModal(false));
+
+        function appendMessage(sender, text) {
+            const isUser = sender === 'user';
+            const html = `
+                <div class="flex items-start gap-3 ${isUser ? 'flex-row-reverse' : ''}">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1 ${isUser ? 'bg-yellow-100 text-yellow-600' : 'bg-indigo-100 text-indigo-500'}">
+                        <i class="fa-solid ${isUser ? 'fa-user' : 'fa-robot'} text-xs"></i>
+                    </div>
+                    <div class="${isUser ? 'bg-yellow-400 text-white rounded-tr-none' : 'bg-white border border-gray-100 text-gray-700 rounded-tl-none'} shadow-sm p-3 rounded-2xl text-sm leading-relaxed max-w-[80%]">
+                        ${text}
+                    </div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', html);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function appendLoading() {
+            const id = 'loading-' + Date.now();
+            const html = `
+                <div id="${id}" class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500 shrink-0 mt-1">
+                        <i class="fa-solid fa-robot text-xs"></i>
+                    </div>
+                    <div class="bg-white border border-gray-100 shadow-sm p-4 rounded-2xl rounded-tl-none flex gap-1">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                    </div>
+                </div>
+            `;
+            chatContainer.insertAdjacentHTML('beforeend', html);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            return id;
+        }
+
+        function removeLoading(id) {
+            const el = document.getElementById(id);
+            if(el) el.remove();
+        }
+
+        async function fetchWithRetry(url, options, retries = 5) {
+            const delays = [1000, 2000, 4000, 8000, 16000]; 
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const res = await fetch(url, options);
+                    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                    return await res.json();
+                } catch (err) {
+                    if (i === retries - 1) throw err;
+                    await new Promise(resolve => setTimeout(resolve, delays[i]));
+                }
+            }
+        }
+
+        // 백엔드 통신 로직
+        async function askGemini(userMessage) {
+            const pendingTasks = currentMilestoneData.checklist
+                .filter(item => !checkedState[item.id])
+                .map(item => item.text);
+
+            try {
+                // 백엔드 API 라우트 호출
+                const result = await fetchWithRetry('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: userMessage,
+                        month: currentGroupLabel,
+                        pendingTasks: pendingTasks
+                    })
+                });
+                
+                if (result.error) {
+                    return "서버 오류: " + result.error;
+                }
+                return result.reply || "죄송해요, 답변을 생성하지 못했어요.";
+            } catch (error) {
+                return "네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
+            }
+        }
+
+        async function handleSend() {
+            const text = aiInput.value.trim();
+            if(!text) return;
+
+            aiInput.value = '';
+            btnSendAi.disabled = true;
+            appendMessage('user', text);
+            
+            const loadingId = appendLoading();
+
+            const responseText = await askGemini(text);
+
+            removeLoading(loadingId);
+            appendMessage('bot', responseText);
+            btnSendAi.disabled = false;
+        }
+
+        btnSendAi.addEventListener('click', handleSend);
+        aiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+
+        // SW 등록 유지
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('✅ SW 등록 성공:', reg.scope))
+                    .catch(err => console.warn('SW 등록 실패:', err));
+            });
+        }
+
+        updateButtonStates();
+        currentGroupLabel = milestoneData[0].label;
+        document.getElementById('ai-context-month').textContent = currentGroupLabel;
+        updateProjectedDate();
+        renderContent(milestoneData[0], 'init');
+
+    </script>
+</body>
+</html>
