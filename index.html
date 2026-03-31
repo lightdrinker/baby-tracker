@@ -117,10 +117,11 @@
     </div>
 
     <script>
-        // --- 1. Data Structure (콘텐츠 유지) ---
+        // --- 1. Data Structure ---
         const milestoneData = [
             {
                 range: [1], label: '생후 1개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 대한소아과학회',
                 size: { boy: '4.5kg / 54.7cm', girl: '4.2kg / 53.7cm' },
                 behaviors: ['엄마, 아빠 목소리에 반응해요.', '초점책을 보며 시선을 맞춰요.', '배냇짓(무의식적인 미소)을 해요.', '깜짝 놀라는 모로 반사가 있어요.'],
                 checklist: [
@@ -129,22 +130,36 @@
                     { id: 'c1_3', text: '모로반사 방지를 위한 속싸개/스와들업 입히기' },
                     { id: 'c1_4', text: '태열 관리를 위해 실내 온도 22도, 습도 50% 유지' },
                     { id: 'c1_5', text: '뼈 성장을 위한 액상 비타민 D 매일 먹이기' }
+                ],
+                redFlags: [
+                    '수유 중 빠는 힘이 매우 약하거나 먹으려 하지 않아요',
+                    '밝은 빛에 눈을 깜빡이지 않아요',
+                    '팔다리를 거의 움직이지 않아요',
+                    '목이 한쪽으로만 기울어져 있어요 (사경 의심)'
                 ]
             },
             {
                 range: [2], label: '생후 2개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 질병관리청 예방접종 도우미',
                 size: { boy: '5.6kg / 58.4cm', girl: '5.1kg / 57.1cm' },
                 behaviors: ['목을 가누기 시작해요 (터미타임).', '"우~", "아~" 옹알이를 해요.', '사람을 보고 방긋 웃어요.', '자기 손을 쳐다봐요.'],
                 checklist: [
-                    { id: 'c2_1', text: '2개월 국가예방접종(펜탁심 등) 및 로타바이러스 접종' },
+                    { id: 'c2_1', text: '2개월 국가예방접종 (DTaP·폴리오·Hib·PCV 1차, 로타바이러스 1차)' },
                     { id: 'c2_2', text: '아기가 깨어있을 때 터미타임(엎드려 놓기) 짧게 연습' },
                     { id: 'c2_3', text: '예쁜 두상을 위해 누워있는 방향 좌우로 번갈아 주기' },
                     { id: 'c2_4', text: '밤낮 구분 시작! 수면 의식(목욕-수유-자장가) 루틴 만들기' },
                     { id: 'c2_5', text: '수유량이 하루 800~1000ml 정도 되는지 체크' }
+                ],
+                redFlags: [
+                    '소리에 전혀 반응하지 않아요',
+                    '사람을 보고 웃지 않아요 (사회적 미소 없음)',
+                    '눈으로 움직이는 물체를 따라가지 못해요',
+                    '손이 항상 꽉 쥐어져 있어요'
                 ]
             },
             {
                 range: [3], label: '생후 3개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 대한소아과학회',
                 size: { boy: '6.4kg / 61.4cm', girl: '5.8kg / 59.8cm' },
                 behaviors: ['소리 나는 쪽으로 고개를 돌려요.', '손을 모으고 장난감을 잡으려 해요.', '옹알이 소리가 다양해져요.'],
                 checklist: [
@@ -153,22 +168,36 @@
                     { id: 'c3_3', text: '뒤집기 시도에 대비해 침대 주변 위험한 물건 치우기' },
                     { id: 'c3_4', text: '통잠을 위해 밤수(밤중 수유) 간격 서서히 늘려보기' },
                     { id: 'c3_5', text: '백일의 기절(수면퇴행기)이 올 수 있으니 멘탈 관리!' }
+                ],
+                redFlags: [
+                    '엎드렸을 때 고개를 전혀 들지 못해요',
+                    '눈이 안쪽 또는 바깥쪽으로 몰려 있어요 (사시 의심)',
+                    '울음 외에 소리를 내지 않아요',
+                    '근육이 매우 축 늘어져 보여요'
                 ]
             },
             {
                 range: [4], label: '생후 4개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 질병관리청',
                 size: { boy: '7.0kg / 63.9cm', girl: '6.4kg / 62.1cm' },
                 behaviors: ['뒤집기를 시도해요.', '모든 것을 입으로 가져가요 (구강기).', '소리 내어 깔깔 웃어요.'],
                 checklist: [
-                    { id: 'c4_1', text: '생후 4~6개월 1차 영유아 건강검진 받기' },
+                    { id: 'c4_1', text: '생후 4~6개월 2차 영유아 건강검진 받기 (1차는 생후 14~35일)' },
                     { id: 'c4_2', text: '구강기 대비! 장난감, 치발기 매일 깨끗하게 소독하기' },
                     { id: 'c4_3', text: '초기 이유식 준비물(냄비, 스파출라, 용기 등) 세팅' },
                     { id: 'c4_4', text: '수면 교육(안눕법, 퍼버법 등) 아기 성향에 맞춰 시도' },
-                    { id: 'c4_5', text: '침대나 쇼파 등 낙상 사고 각별히 주의하기' }
+                    { id: 'c4_5', text: '침대나 소파 등 낙상 사고 각별히 주의하기' }
+                ],
+                redFlags: [
+                    '물건을 잡으려 하지 않아요',
+                    '눈으로 물체를 따라가지 못해요',
+                    '소리 내어 웃지 않아요',
+                    '엎드렸을 때 고개를 45도 이상 들지 못해요'
                 ]
             },
             {
                 range: [5], label: '생후 5개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 대한소아과학회',
                 size: { boy: '7.5kg / 65.9cm', girl: '6.9kg / 64.0cm' },
                 behaviors: ['완벽하게 뒤집기를 해요.', '발을 잡고 입으로 가져가요.', '낯선 사람을 구별하기 시작해요.'],
                 checklist: [
@@ -177,22 +206,36 @@
                     { id: 'c5_3', text: '첫 이앓이 징후(미열, 침, 보챔)가 있는지 잇몸 관찰' },
                     { id: 'c5_4', text: '거울을 자주 보여주며 자아 인식을 도와주기' },
                     { id: 'c5_5', text: '밤중 수유 완전히 끊기 시도 (치아 우식증 예방)' }
+                ],
+                redFlags: [
+                    '앉혀 놓았을 때 머리를 전혀 가누지 못해요',
+                    '한쪽 팔이나 다리를 거의 사용하지 않아요',
+                    '옹알이를 전혀 하지 않아요',
+                    '사람에게 관심을 보이지 않아요'
                 ]
             },
             {
                 range: [6], label: '생후 6개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 질병관리청 예방접종 도우미',
                 size: { boy: '7.9kg / 67.6cm', girl: '7.3kg / 65.7cm' },
                 behaviors: ['혼자서 잠깐씩 앉아있어요.', '이름을 부르면 반응해요.', '아랫니가 올라오기 시작해요.'],
                 checklist: [
-                    { id: 'c6_1', text: '6개월 국가예방접종 (B형간염 3차 등) 및 독감 접종' },
+                    { id: 'c6_1', text: '6개월 국가예방접종 (DTaP·폴리오·Hib·PCV·B형간염 3차) + 독감 첫 접종 시 2회 필요' },
                     { id: 'c6_2', text: '엄마표 철분 고갈 시기! 이유식에 소고기 매일 추가하기' },
                     { id: 'c6_3', text: '빨대컵이나 추빨대컵으로 물 마시는 연습 시작' },
                     { id: 'c6_4', text: '떡뻥 등 첫 간식 시도 시 알레르기와 질식 주의' },
                     { id: 'c6_5', text: '아랫니가 났다면 구강티슈나 실리콘 칫솔로 양치 시작' }
+                ],
+                redFlags: [
+                    '도움 없이 앉으려 하지 않아요',
+                    '이름을 불러도 전혀 반응하지 않아요',
+                    '양쪽으로 뒤집기를 하지 못해요',
+                    '옹알이가 전혀 없어요'
                 ]
             },
             {
                 range: [7, 8], label: '7~8개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 대한소아과학회',
                 size: { boy: '8.5kg / 70.0cm', girl: '7.9kg / 68.5cm' },
                 behaviors: ['배밀이를 하거나 기어가기 시작해요.', '엄마 아빠를 알아보고 낯가림이 생겨요.', '양손에 물건을 쥐고 부딪혀요.'],
                 checklist: [
@@ -201,58 +244,93 @@
                     { id: 'c7_3', text: '중기 이유식(하루 2끼)으로 늘리고 다양한 식재료 테스트' },
                     { id: 'c7_4', text: '분리불안 완화를 위해 까꿍 놀이(대상영속성) 자주 해주기' },
                     { id: 'c7_5', text: '작은 물건(동전, 건전지)을 삼키지 않도록 바닥 청소 철저' }
+                ],
+                redFlags: [
+                    '혼자서 앉지 못해요',
+                    '물건을 한 손에서 다른 손으로 옮기지 못해요',
+                    '엄마 아빠에게 애착을 보이지 않아요',
+                    '"엄마", "아빠" 소리의 옹알이가 전혀 없어요'
                 ]
             },
             {
                 range: [9, 10, 11], label: '9~11개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 질병관리청',
                 size: { boy: '9.4kg / 73.5cm', girl: '8.7kg / 72.0cm' },
                 behaviors: ['소파나 가구를 잡고 일어서요.', '잼잼, 짝짜꿍 등 모방 행동을 해요.', '원하는 것을 손가락으로 가리켜요.'],
                 checklist: [
-                    { id: 'c9_1', text: '9~11개월 영유아 건강검진 및 1차 구강검진 받기' },
+                    { id: 'c9_1', text: '생후 9~12개월 3차 영유아 건강검진 받기' },
                     { id: 'c9_2', text: '후기 이유식(하루 3끼) 시작하며 어른의 식사 패턴 맞추기' },
                     { id: 'c9_3', text: '잡고 일어서다 넘어짐 대비 (머리 쿵 방지 쿠션 등)' },
                     { id: 'c9_4', text: '위험한 행동을 할 때 "안 돼"라고 단호하고 짧게 제지하기' },
                     { id: 'c9_5', text: '스스로 먹을 수 있도록 자기주도 이유식(핑거푸드) 제공' }
+                ],
+                redFlags: [
+                    '잡고 서려 하지 않아요',
+                    '손가락으로 물건이나 관심사를 가리키지 않아요',
+                    '"엄마", "아빠" 말을 하지 않아요',
+                    '이전에 할 수 있던 것을 갑자기 못해요 (발달 퇴행)'
                 ]
             },
             {
                 range: [12, 13, 14], label: '12~14개월 (돌 이후)',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 질병관리청 예방접종 도우미',
                 size: { boy: '10.1kg / 76.5cm', girl: '9.4kg / 75.0cm' },
                 behaviors: ['도움 없이 혼자서 걷기 시작해요.', '의미 있는 단어(물, 맘마)를 사용해요.', '간단한 지시어("가져와")를 이해해요.'],
                 checklist: [
-                    { id: 'c12_1', text: '돌 예방접종(MMR, 수두, 일본뇌염 등) 챙기기' },
+                    { id: 'c12_1', text: '돌 예방접종 (MMR 1차, 수두 1차, A형간염 1차, 일본뇌염) 소아과 확인' },
                     { id: 'c12_2', text: '젖병을 떼고 빨대컵이나 일반 컵으로 생우유 적응하기' },
                     { id: 'c12_3', text: '돌발진(고열 후 열꽃)이 흔한 시기이므로 해열제 상비' },
                     { id: 'c12_4', text: '유아식(맨밥+반찬) 진행 및 제자리에 앉아 먹는 식사 예절 교육' },
                     { id: 'c12_5', text: '치아 건강을 위해 쪽쪽이(공갈젖꼭지) 서서히 떼기 시도' }
+                ],
+                redFlags: [
+                    '혼자 걸으려 하지 않아요',
+                    '의미 있는 단어가 하나도 없어요',
+                    '손가락으로 가리키거나 흔들며 인사하지 않아요',
+                    '이전에 할 수 있던 것을 갑자기 못해요 (발달 퇴행)'
                 ]
             },
             {
                 range: [15, 16, 17], label: '15~17개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 질병관리청 예방접종 도우미',
                 size: { boy: '10.8kg / 80.0cm', girl: '10.0kg / 78.5cm' },
                 behaviors: ['빨리 걷거나 뛸 수 있어요.', '숟가락질을 스스로 하려고 해요.', '자기 주장이 강해지고 떼를 써요.'],
                 checklist: [
-                    { id: 'c15_1', text: '15개월 예방접종(DTaP, 폴리오 등) 스케줄 확인' },
+                    { id: 'c15_1', text: '15개월 예방접종 (DTaP 4차, 폴리오 4차, Hib 4차, PCV 4차) 스케줄 확인' },
                     { id: 'c15_2', text: '야외 걷기 시작! 편한 신발과 미아방지 가방/목걸이 준비' },
                     { id: 'c15_3', text: '블록 쌓기, 모양 맞추기 장난감으로 소근육과 인지 발달 돕기' },
                     { id: 'c15_4', text: '양치 거부가 심해지므로 관련 그림책이나 놀이로 유도하기' },
                     { id: 'c15_5', text: '위험하지 않은 선에서 아이 스스로 선택하는 자율성 존중' }
+                ],
+                redFlags: [
+                    '혼자 걷지 못해요',
+                    '의미 있는 단어가 3개 미만이에요',
+                    '간단한 지시를 전혀 이해하지 못해요',
+                    '다른 사람과 눈을 잘 맞추지 않아요'
                 ]
             },
             {
                 range: [18, 19, 20], label: '18~20개월',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 질병관리청',
                 size: { boy: '11.4kg / 83.0cm', girl: '10.7kg / 81.5cm' },
                 behaviors: ['두 단어를 연결해서 말해요 ("엄마 까까").', '블록을 3~4개 쌓을 수 있어요.', '어른의 행동을 모방(청소 등)해요.'],
                 checklist: [
-                    { id: 'c18_1', text: '18~24개월 영유아 건강검진 예약 및 받기' },
+                    { id: 'c18_1', text: '생후 18~24개월 4차 영유아 건강검진 + 1차 구강검진 (18~29개월 내) 받기' },
                     { id: 'c18_2', text: '일명 마의 18개월! 떼쓰기에 대한 단호하고 일관된 훈육 숙지' },
                     { id: 'c18_3', text: '스마트폰, TV 등 미디어 노출은 최대한 미루거나 엄격히 제한' },
                     { id: 'c18_4', text: '다 놀고 난 뒤 "같이 정리하자"며 장난감 정리 습관 기르기' },
                     { id: 'c18_5', text: '"기저귀 가져올래?" 등 아주 간단한 심부름 시켜보기' }
+                ],
+                redFlags: [
+                    '말하는 단어가 10개 미만이에요',
+                    '두 단어를 연결해서 말하지 못해요',
+                    '이름을 불러도 자주 반응하지 않아요',
+                    '걸을 때 자주 넘어지거나 한쪽 발을 끌어요'
                 ]
             },
             {
                 range: [21, 22, 23, 24], label: '21~24개월 (두돌)',
+                source: 'CDC 발달 이정표(2022) · WHO 아동 성장 기준 · 대한소아과학회',
                 size: { boy: '12.2kg / 86.5cm', girl: '11.5kg / 85.0cm' },
                 behaviors: ['간단한 문장으로 대화가 가능해져요.', '혼자서 옷이나 신발을 벗을 수 있어요.', '대소변에 관심을 보여요 (배변 훈련 시작).'],
                 checklist: [
@@ -261,6 +339,12 @@
                     { id: 'c21_3', text: '언어 폭발기이므로 책을 많이 읽어주고 수다쟁이 부모 되기' },
                     { id: 'c21_4', text: '공원, 놀이터 등에서 또래 친구들과 어울려 노는 기회 제공' },
                     { id: 'c21_5', text: '아기 몸무게/키 확인 후 카시트 앞보기 전환 고려 (최대한 뒤보기 권장)' }
+                ],
+                redFlags: [
+                    '두 단어 이상 조합하지 못해요',
+                    '간단한 지시를 이해하지 못해요',
+                    '아직 뛰지 못하거나 자주 넘어져요',
+                    '다른 아이들에게 전혀 관심이 없어요'
                 ]
             }
         ];
@@ -285,8 +369,20 @@
 
         birthDateInput.addEventListener('change', (e) => {
             localStorage.setItem('babyTrackerBirthDate', e.target.value);
+            const real = calculateRealMonth();
+            if (real) changeMonth(real);
             updateProjectedDate();
         });
+
+        function calculateRealMonth() {
+            const saved = localStorage.getItem('babyTrackerBirthDate');
+            if (!saved) return null;
+            const birth = new Date(saved);
+            const now = new Date();
+            const months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+            if (months < 1) return null;
+            return Math.min(months, 24);
+        }
 
         function updateProjectedDate() {
             if (!birthDateInput.value) {
@@ -391,7 +487,7 @@
             `;
 
             const checklistHeader = `
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-10">
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-5">
                     <h2 class="text-base font-bold text-gray-800 flex items-center gap-2 mb-4">
                         <i class="fa-regular fa-square-check text-purple-400"></i> 부모님 체크리스트
                     </h2>
@@ -419,7 +515,32 @@
             }).join('');
 
             const checklistFooter = `</div></div>`;
-            const fullHtml = sizeHtml + behaviorsHtml + checklistHeader + checklistItems + checklistFooter;
+
+            const redFlagsHtml = data.redFlags && data.redFlags.length ? `
+                <div class="bg-white rounded-2xl shadow-sm border border-amber-100 mb-10 overflow-hidden">
+                    <button onclick="const c=this.nextElementSibling;c.classList.toggle('hidden');this.querySelector('.rf-chevron').classList.toggle('rotate-180')"
+                            class="w-full p-5 flex items-center justify-between text-left">
+                        <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-400"></i> 이런 신호는 확인하세요
+                        </h2>
+                        <i class="fa-solid fa-chevron-down rf-chevron text-gray-400 text-sm transition-transform duration-200"></i>
+                    </button>
+                    <div class="hidden px-5 pb-5">
+                        <p class="text-xs text-gray-500 mb-3">아래 신호가 보이면 소아과 상담을 권장해요</p>
+                        <ul class="space-y-2">
+                            ${data.redFlags.map(flag => `
+                                <li class="flex items-start gap-2 text-sm text-gray-700">
+                                    <i class="fa-solid fa-circle-exclamation text-amber-400 mt-0.5 text-xs shrink-0"></i>
+                                    <span>${flag}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <p class="text-[11px] text-gray-400 mt-4">출처: ${data.source}</p>
+                    </div>
+                </div>
+            ` : '';
+
+            const fullHtml = sizeHtml + behaviorsHtml + checklistHeader + checklistItems + checklistFooter + redFlagsHtml;
 
             animatePageTransition(fullHtml, direction);
         }
@@ -500,8 +621,14 @@
         }
 
         // --- 6. Initialization ---
+        const realMonth = calculateRealMonth();
+        if (realMonth) {
+            currentMonth = realMonth;
+            slider.value = currentMonth;
+            monthDisplay.textContent = currentMonth;
+        }
         updateButtonStates();
-        const initData = milestoneData[0];
+        const initData = milestoneData.find(m => m.range.includes(currentMonth)) || milestoneData[0];
         currentGroupLabel = initData.label;
         updateProjectedDate();
         renderContent(initData, 'init');
